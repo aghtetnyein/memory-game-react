@@ -34,19 +34,10 @@ const SelectItem = ({
   gameOptionsDispatch,
 }: ISelectItemProps) => {
   const handleClick = () => {
-    switch (title) {
-      case "Select Theme":
-        gameOptionsDispatch({
-          type: "SELECT_THEME",
-          payload: { selectedOption: label },
-        });
-        break;
-      case "Grid Size":
-        gameOptionsDispatch({
-          type: "SELECT_GRID_SIZE",
-          payload: { selectedOption: label },
-        });
-    }
+    gameOptionsDispatch({
+      type: "SELECT_OPTION",
+      payload: { title, selectedOption: label },
+    });
   };
 
   return (

@@ -13,6 +13,7 @@ interface IStateProps {
 interface IActionProps {
   type: string;
   payload: {
+    title: string;
     selectedOption: string;
   };
 }
@@ -50,9 +51,9 @@ const INITIAL_STATE = {
 
 const gameOptionsReducer = (state: IStateProps, action: IActionProps) => {
   switch (action.type) {
-    case "SELECT_THEME":
+    case "SELECT_OPTION":
       let themeOptions = state.options.map((option) => {
-        if (option.title === "Select Theme") {
+        if (option.title === action.payload.title) {
           return {
             ...option,
             options: option.options.map((option) => {
@@ -66,22 +67,6 @@ const gameOptionsReducer = (state: IStateProps, action: IActionProps) => {
         return option;
       });
       return { ...INITIAL_STATE, options: themeOptions };
-    case "SELECT_GRID_SIZE":
-      let gridSizeOptions = state.options.map((option) => {
-        if (option.title === "Grid Size") {
-          return {
-            ...option,
-            options: option.options.map((option) => {
-              return {
-                ...option,
-                selected: option.label === action.payload.selectedOption,
-              };
-            }),
-          };
-        }
-        return option;
-      });
-      return { ...INITIAL_STATE, options: gridSizeOptions };
     default:
       return {
         ...INITIAL_STATE,
